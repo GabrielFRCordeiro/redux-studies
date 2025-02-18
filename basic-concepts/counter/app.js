@@ -1,5 +1,5 @@
 const initialState = {
-    counter: 0
+    count: 0
 }
 
 const incrementAction = {
@@ -10,34 +10,34 @@ const decrementAction = {
     type: 'DECREMENT'
 }
 
-const reducer = (state = initialState, action) => {
+const countReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INCREMENT':
-            return {counter: state.counter + 1};
+            return {...state, count: state.count + 1}
         
         case 'DECREMENT':
-            return {counter: state.counter - 1};
-            
+            return {...state, count: state.count - 1}
+    
         default:
-            return {counter: state.counter};
+            return state
     }
 }
 
-const store = Redux.createStore(reducer);
+const store = Redux.createStore(countReducer);
 
 function render() {
     const state = store.getState();
-    document.querySelector("#counter").innerText = state.counter;
+    document.querySelector("#counter").innerText = state.count;
 }
 
-store.subscribe(render);
+store.subscribe(render)
 
 render();
 
 document.querySelector("#increment").addEventListener("click", e => {
-    store.dispatch(incrementAction);
-});
+    store.dispatch(incrementAction)
+})
 
 document.querySelector("#decrement").addEventListener("click", e => {
-    store.dispatch(decrementAction);
-});
+    store.dispatch(decrementAction)
+})
