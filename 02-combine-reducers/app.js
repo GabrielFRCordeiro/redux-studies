@@ -1,10 +1,9 @@
-let newTask;
-
 const initialState = {
     backlog: [],
     done: []
 }
 
+// use payload to add the new task
 const createTaskAction = (task) => ({
     type: 'CREATE',
     payload: task
@@ -15,6 +14,7 @@ const concludeTaskAction = (task) => ({
     payload: task
 });
 
+// different states for each reducer
 const createTaskReducer = (state = { backlog: [] }, action) => {
     switch (action.type) {
         case 'CREATE':
@@ -39,6 +39,7 @@ const concludeTaskReducer = (state = { done: [] }, action) => {
     }
 }
 
+// create a root reducer
 const rootReducer = Redux.combineReducers({
     create: createTaskReducer,
     conclude: concludeTaskReducer
@@ -66,6 +67,6 @@ render();
 
 document.querySelector("#btn_submit").addEventListener("click", e => {
     e.preventDefault();
-    newTask = document.querySelector("#t_field_task").value;
+    const newTask = document.querySelector("#t_field_task").value;
     store.dispatch(createTaskAction(newTask));
 });
