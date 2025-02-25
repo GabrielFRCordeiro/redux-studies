@@ -5,21 +5,21 @@ const initialState = {
     done: []
 }
 
-export const taskReducer = (state, action) => {
+export const taskReducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.CREATE_TASK:
             return {
                 ...state,
                 backlog: [...state.backlog, action.payload]
-            }
+            };
         
         case ActionTypes.CONCLUDE_TASK:
             return {
                 ...state,
                 done: [...state.done, action.payload]
-            }
+            };
     
         default:
-            break;
+            return state;
     }
 }
